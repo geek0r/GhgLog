@@ -1,0 +1,17 @@
+﻿@foreach (var milestone in @Model.Milestones)
+{
+@:### @milestone.Title
+@:
+
+   foreach (var lbl in milestone.Labels)
+    {
+@:#### @lbl.Title
+@:
+
+        foreach (var issue in lbl.Issues)
+        {
+  @:* @issue.Id @Raw(issue.Title)
+        }
+@:
+    }
+}

@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Changelog</title>
+    <meta name="description" content="blalala">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <!-- TOC -->
+    <ul class="toc">
+        @foreach (var milestone in @Model.Milestones)
+        {
+            <li><a href="#@milestone.Title">@milestone.Title</a></li>
+        }
+    </ul>
+
+
+    @foreach (var milestone in @Model.Milestones)
+    {
+        <h2><a name="@milestone.Title">@milestone.Title</a></h2>
+
+        foreach (var lbl in milestone.Labels)
+        {
+            <h3>@lbl.Title</h3>
+            <ul class="issue-list">
+                @foreach (var issue in lbl.Issues)
+                {
+                    <li class="issue">
+                        <span class="id"><a href="@issue.Url" class="external">#@issue.Id</a></span>
+                        <span class="title"><a href="#issue_@issue.Id">@issue.Title</a></span>
+                        <div class="body" data-related-id="issue_@issue.Id">
+                            @Raw(issue.Body)
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+    }
+</body>
+</html>

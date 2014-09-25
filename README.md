@@ -1,4 +1,1 @@
-GhgLog
-======
-
-Github.com changelog generator
+Simple changelog-generator out of github.com issues, milestones and labels
