@@ -23,7 +23,7 @@
     }
     #endregion
 
-    public IEnumerable<CustomSoft.GhgLog.Core.Model.Issue> Extract(ExtractOptions opt)
+    public CustomSoft.GhgLog.Core.Model.ChangelogData Extract(ExtractOptions opt)
     {
       var req = new RepositoryIssueRequest();
       req.State = ItemState.Closed;
@@ -34,7 +34,12 @@
         .Result
         .Select(x => x.ToIssue());
 
-      return issues;
+      return new Model.ChangelogData()
+        {
+          Issues = issues,
+          Repository = opt.Repos,
+          Owner = opt.Org
+        };
     }
   }
 }

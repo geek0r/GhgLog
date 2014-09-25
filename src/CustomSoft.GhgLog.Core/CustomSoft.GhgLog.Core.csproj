@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Extract\ExtractOptions.cs" />
     <Compile Include="Extract\IssueExtractor.cs" />
+    <Compile Include="Model\ChangelogData.cs" />
     <Compile Include="Model\Issue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transform\Changelog.cs" />

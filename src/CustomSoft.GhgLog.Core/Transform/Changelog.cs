@@ -13,7 +13,7 @@
   /// </summary>
   public class Changelog
   {
-    public void Transform(IEnumerable<CustomSoft.GhgLog.Core.Model.Issue> data, Options opt)
+    public void Transform(CustomSoft.GhgLog.Core.Model.ChangelogData data, Options opt)
     {
       var sb = new StringBuilder();
 
@@ -21,14 +21,14 @@
       var represData = new CustomSoft.GhgLog.Core.Transform.TransformedRepresentation()
       {
         BuildDate = DateTime.Now,
-        Issues = data
+        Issues = data.Issues
       };
 
       // Fetch milestones and labels
       var milestones = new List<CustomSoft.GhgLog.Core.Transform.Milestone>();
 
       // Eval each milestone
-      foreach (var grp in data.GroupBy(x => x.Milestone).OrderByDescending(x => x.Key))
+      foreach (var grp in data.Issues.GroupBy(x => x.Milestone).OrderByDescending(x => x.Key))
       {
         var labels = new List<CustomSoft.GhgLog.Core.Transform.Label>();
 
@@ -37,7 +37,7 @@
         {
           Title = tmp.Milestone,
           ClosedOn = tmp.MilestoneDate,
-          Issues = data.Where(x => x.Milestone == grp.Key)
+          Issues = data.Issues.Where(x => x.Milestone == grp.Key)
         };
 
         // Get all labels "within" that milestone 
@@ -76,6 +76,8 @@
       }
 
       represData.Milestones = milestones.OrderByDescending(x => x.Title).ToList();
+      represData.Repository = data.Repository;
+      represData.Owner = data.Owner;
 
       var tplData = Razor.Parse(changeTpl, represData);
 

@@ -10,6 +10,10 @@
     public IEnumerable<Milestone> Milestones { get; set; }
 
     public DateTime BuildDate { get; set; }
+
+    public String Repository { get; set; }
+
+    public String Owner { get; set; }
   }
 
   public class Milestone
