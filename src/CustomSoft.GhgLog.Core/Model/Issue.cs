@@ -26,6 +26,8 @@
 
     public DateTime? MilestoneDate { get; set; }
 
+    public DateTime? MilestoneCloseDate { get; set; }
+
     public IEnumerable<String> Labels { get; set; }
 
     public IEnumerable<String> Comments { get; set; }

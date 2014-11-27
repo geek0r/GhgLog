@@ -18,12 +18,12 @@
         Url = data.HtmlUrl.AbsoluteUri
       };
 
-      if(data.Assignee != null)
+      if (data.Assignee != null)
       {
         i.Assignee = data.Assignee.Name;
       }
 
-      if(data.Milestone != null)
+      if (data.Milestone != null)
       {
         i.Milestone = data.Milestone.Title;
         i.MilestoneDate = data.Milestone.DueOn.HasValue ? data.Milestone.DueOn.Value.DateTime : new System.Nullable<DateTime>();

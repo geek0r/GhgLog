@@ -3,9 +3,36 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Changelog</title>
-    <meta name="description" content="blalala">
+    <title>@Model.Owner | @Model.Repository: Changelog</title>
+    <meta name="description" content="Changelog for project @Model.Repository">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.issue .title a').click(function (e) {
+                var obj = $(e.target),
+                  bodyElem = $(obj.attr('href') + '_body');
+
+                bodyElem.toggle();
+            });
+        });
+    </script>
+    <style type="text/css">
+        body {
+            font: 10pt Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        }
+
+        .issue-list {
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .issue .body {
+            white-space: pre-line;
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <!-- TOC -->
@@ -30,7 +57,7 @@
                     <li class="issue">
                         <span class="id"><a href="@issue.Url" class="external">#@issue.Id</a></span>
                         <span class="title"><a href="#issue_@issue.Id">@issue.Title</a></span>
-                        <div class="body" data-related-id="issue_@issue.Id">
+                        <div class="body" id="issue_@issue.Id_body">
                             @Raw(issue.Body)
                         </div>
                     </li>

@@ -11,12 +11,13 @@
       var setting = CustomSoft.GhgLog.Console.Properties.Settings.Default;
 
       var e = new IssueExtractor(setting.GithubLogin, setting.GithubPassword);
-
-      var data = e.Extract(new ExtractOptions()
+      var extractOpt = new ExtractOptions()
         {
           Org = setting.GithubOwner,
           Repos = setting.GithubRepos
-        });
+        };
+
+      var data = e.Extract(extractOpt);
 
       var t = new CustomSoft.GhgLog.Core.Transform.Changelog();
       t.Transform(data, new GhgLog.Core.Transform.Options()
